@@ -1,0 +1,57 @@
+1.4.5 STL 容器用过哪些，查找的时间复杂度是多少，为什么？
+参考回答
+
+    STL中常用的容器有
+    vector、deque、list、map、set、multimap、multiset、unordered_map、unordered_set等。
+    容器底层实现方式及时间复杂度分别如下：
+
+1.vector
+
+采用一维数组实现，元素在内存连续存放，不同操作的时间复杂度为：
+
+插入: O(N)
+
+查看: O(1)
+
+删除: O(N)
+
+2.deque
+///deque 的说错了。类似分块表、块状链表
+///https://zhuanlan.zhihu.com/p/345798683
+采用双向队列实现，元素在内存连续存放，不同操作的时间复杂度为：
+
+插入: O(N)
+
+查看: O(1)
+
+删除: O(N)
+
+3.list
+
+采用双向链表实现，元素存放在堆中，不同操作的时间复杂度为：
+
+插入: O(1)
+
+查看: O(N)
+
+删除: O(1)
+
+4.map、set、multimap、multiset
+
+上述四种容器采用红黑树实现，红黑树是平衡二叉树的一种。不同操作的时间复杂度近似为:
+
+插入: O(logN)
+
+查看: O(logN)
+
+删除: O(logN)
+
+5.unordered_map、unordered_set、unordered_multimap、 unordered_multiset
+
+上述四种容器采用哈希表实现，不同操作的时间复杂度为： 插入: O(1)，最坏情况O(N)
+
+查看: O(1)，最坏情况O(N)
+
+删除: O(1)，最坏情况O(N)
+
+注意：容器的时间复杂度取决于其底层实现方式。
