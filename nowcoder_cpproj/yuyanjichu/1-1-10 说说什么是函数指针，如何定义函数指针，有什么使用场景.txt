@@ -1,0 +1,31 @@
+1.1.10 说说什么是函数指针，如何定义函数指针，有什么使用场景
+参考回答
+
+1.概念：函数指针就是指向函数的指针变量。每一个函数都有一个入口地址，该入口地址就是函数指针所指向的地址。
+
+2.定义形式如下：
+
+int func(int a);  
+int (*f)(int a);  
+f = &func;  
+
+1.函数指针的应用场景：回调（callback）。我们调用别人提供的 API函数(Application Programming Interface,应用程序编程接口)，称为Call；如果别人的库里面调用我们的函数，就叫Callback。
+
+答案解析
+
+//以库函数qsort排序函数为例，它的原型如下：
+void qsort(void *base,//void*类型，代表原始数组
+           size_t nmemb, //第二个是size_t类型，代表数据数量
+           size_t size, //第三个是size_t类型，代表单个数据占用空间大小
+           int(*compar)(const void *,const void *)//第四个参数是函数指针
+          );
+//第四个参数告诉qsort，应该使用哪个函数来比较元素，即只要我们告诉qsort比较大小的规则，它就可以帮我们对任意数据类型的数组进行排序。在库函数qsort调用我们自定义的比较函数，这就是回调的应用。
+
+//示例
+int num[100];
+int cmp_int(const void* _a , const void* _b){//参数格式固定
+    int* a = (int*)_a;    //强制类型转换
+    int* b = (int*)_b;
+    return *a - *b;　　
+}
+qsort(num,100,sizeof(num[0]),cmp_int); //回调

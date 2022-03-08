@@ -1,0 +1,9 @@
+1.3.15 说说类继承时，派生类对不同关键字修饰的基类方法的访问权限
+
+类中的成员可以分为三种类型，分别为public成员、protected成员、public成员。类中可以直接访问自己类的public、protected、private成员，但类对象只能访问自己类的public成员。
+
+1.public继承：派生类可以访问基类的public、protected成员，不可以访问基类的private成员； 派生类对象可以访问基类的public成员，不可以访问基类的protected、private成员。
+
+2.protected继承：派生类可以访问基类的public、protected成员，不可以访问基类的private成员； 派生类对象不可以访问基类的public、protected、private成员。
+
+3.private继承：派生类可以访问基类的public、protected成员，不可以访问基类的private成员； 派生类对象不可以访问基类的public、protected、private成员。

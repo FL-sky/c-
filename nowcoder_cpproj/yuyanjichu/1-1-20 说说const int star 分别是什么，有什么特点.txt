@@ -1,0 +1,9 @@
+1.1.20 说说const int *a, int const *a, const int a, int *const a, const int *const a分别是什么，有什么特点。
+
+参考回答
+
+1. const int a;     //指的是a是一个常量，不允许修改。
+2. const int *a;    //a指针所指向的内存里的值不变，即（*a）不变
+3. int const *a;    //同const int *a;
+4. int *const a;    //a指针所指向的内存地址不变，即a不变
+5. const int *const a;   //都不变，即（*a）不变，a也不变
