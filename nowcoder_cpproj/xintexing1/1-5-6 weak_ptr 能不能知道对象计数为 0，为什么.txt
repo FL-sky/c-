@@ -1,0 +1,9 @@
+1.5.6 weak_ptr 能不能知道对象计数为 0，为什么？
+参考回答
+
+    不能。
+
+    weak_ptr是一种不控制对象生命周期的智能指针，它指向一个shared_ptr管理的对象。
+    进行该对象管理的是那个引用的shared_ptr。weak_ptr只是提供了对管理 对象的一个访问手段。
+    weak_ptr设计的目的只是为了配合shared_ptr而引入的一种智能指针，配合shared_ptr工作，
+    它只可以从一个shared_ptr或者另一个weak_ptr对象构造，它的构造和析构不会引起计数的增加或减少。
