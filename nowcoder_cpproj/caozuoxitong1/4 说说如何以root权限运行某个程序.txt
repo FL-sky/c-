@@ -1,0 +1,5 @@
+2.4 说说如何以root权限运行某个程序。
+参考回答
+
+sudo chown root app（文件名） sudo chmod u+s app（文件名）
+输入上面两条指令后即可

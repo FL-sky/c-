@@ -1,0 +1,45 @@
+2.7 简述GDB常见的调试命令，什么是条件断点，多进程下如何调试。
+参考回答
+
+GDB调试：gdb调试的是可执行文件，在gcc编译时加入 -g ，告诉gcc在编译时加入调试信息，这样gdb才能调试这个被编译的文件 gcc -g tesst.c -o test
+
+GDB命令格式：
+
+1.quit：退出gdb，结束调试
+
+2.list：查看程序源代码
+
+    list 5，10：显示5到10行的代码
+
+    list test.c:5, 10: 显示源文件5到10行的代码，在调试多个文件时使用
+
+    list get_sum: 显示get_sum函数周围的代码
+
+    list test,c get_sum: 显示源文件get_sum函数周围的代码，在调试多个文件时使用
+
+3.reverse-search：字符串用来从当前行向前查找第一个匹配的字符串
+
+4.run：程序开始执行
+
+5.help list/all：查看帮助信息
+
+6.break：设置断点
+
+    break 7：在第七行设置断点
+
+    break get_sum：以函数名设置断点
+
+    break 行号或者函数名 if 条件：以条件表达式设置断点
+
+7.watch 条件表达式：条件表达式发生改变时程序就会停下来
+
+8.next：继续执行下一条语句 ，会把函数当作一条语句执行
+
+9.step：继续执行下一条语句，会跟踪进入函数，一次一条的执行函数内的代码
+
+
+条件断点：break if 条件 以条件表达式设置断点
+
+多进程下如何调试：
+用set follow-fork-mode child 调试子进程
+或者set follow-fork-mode parent 调试父进程

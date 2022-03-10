@@ -1,0 +1,658 @@
+var type =  '0';   
+var targetDivId_pd = '';  
+var creativeUrl1 = '//g1.dfcfw.com/g4/202105/20210519151652.jpg';    
+var contentType1 = '0'; //如何给事件这里要加事件
+var clicktag = '1';
+var width1 = '1000';
+var height1 = '450';
+var top1 = '0';
+var followScroll1 = '1';    
+var closeSeconds = '7';
+var showClsbtn = '1';
+var clsbtnUrl = '//g1.dfcfw.com/g4/202004/20200420170247.jpg';    
+var clsbtnWidth = '70';
+var clsbtnHeight = '93';
+var showRecycle = '1';
+var creativeUrl2 = '//g1.dfcfw.com/g4/202004/20200420170257.jpg'; 
+var contentType2 = '0';
+var callback = '1';
+var xalign2 = 'left';
+var xpadding2 = '0';           
+var yalign2 = 'top';
+var ypadding = '450';
+var followScroll2 = '0';   
+var showstyle = '0';   
+var banneradflag = '0';
+var random="17327";
+type = parseInt(type);                          //是整形一定要转化下，防止传来的是字符串
+contentType1 = parseInt(contentType1);
+clicktag = parseInt(clicktag);
+width1 = parseInt(width1);
+height1 = parseInt(height1);
+top1 = parseInt(top1);
+followScroll1 = parseInt(followScroll1);
+closeSeconds = parseInt(closeSeconds);
+showClsbtn = parseInt(showClsbtn);
+clsbtnWidth = parseInt(clsbtnWidth);
+clsbtnHeight = parseInt(clsbtnHeight);
+showRecycle = parseInt(showRecycle);
+contentType2 = parseInt(contentType2);
+callback = parseInt(callback);
+xpadding2 = parseInt(xpadding2);
+ypadding = parseInt(ypadding);
+followScroll2 = parseInt(followScroll2);
+showstyle = parseInt(showstyle);
+banneradflag = parseInt(banneradflag);
+if(contentType1){
+    contentType1 = 'flash'
+}else{
+    contentType1 = 'picture';
+}
+if(followScroll1){
+    followScroll1 = true;
+}else{
+    followScroll1 = false;
+}
+if(showClsbtn){
+    showClsbtn = true;
+}else{
+    showClsbtn = false;
+}
+if(showRecycle){
+    showRecycle = true;
+}else{
+    showRecycle = false;
+}
+if(contentType2){
+    contentType2 = 'flash';
+}else{
+    contentType2 = 'picture';
+}
+if(showstyle){
+    showstyle = 'block';
+    alwaysShow = true;
+}else{
+    showstyle = 'none';
+    alwaysShow = false;
+}
+if(showClsbtn){
+    showClsbtn = true;
+}else{
+    showClsbtn = false;
+}
+if(!xpadding2){
+    xpadding2 = 0;
+}
+if(!ypadding){
+    ypadding = 0;
+}
+closeSeconds = closeSeconds*1000;
+if(type){
+    //动态全屏
+    function _as_getcv(k) {
+        var c = document.cookie;
+        var end = c.indexOf (k);
+        if (end == -1)
+            return null;
+        var st = end+k.length+1;
+        end = c.indexOf(";", st);
+        if (end == -1)
+            end = c.length;
+        return unescape(c.substring(st, end));
+    }
+    function _as_setcv(k, v, e, p, d, s) {
+        var expdate = new Date();
+        var argv = _as_setcv.arguments;
+        var argc = _as_setcv.arguments.length;
+        var expires = (argc>2)?argv[2]:null;
+        var path = (argc>3)?argv[3]:null;
+        var domain = (argc>4)?argv[4]:null;
+        var secure = (argc>5)?argv[5]:false;
+        if(expires!=null)
+            expdate.setTime(expdate.getTime()+(expires*1000));
+        var c =  k+"="+escape(v)+"; ";
+        c += ((expires==null)?"":("expires="+expdate.toGMTString()+"; "));
+        c += ((path==null)?"":("path="+path+"; "));
+        c += ((domain==null)?"":("domain="+domain+"; "));
+        c += ((secure==true)?"secure; ":"");
+        document.cookie = c;
+    }
+    function _as_hts(n, s) {
+        var t = _as_getcv(n);
+        if(!t) {_as_setcv(n, "1", s);return 0;}
+        else {return 1;}
+    }
+    function _AdSame_getBody() {
+        if (document.compatMode=="CSS1Compat") {
+            return (document.documentElement)?
+                document.documentElement:document.body;
+        } else {
+            return document.body;
+        }
+    }
+    function _AdSame_getBodyScrollTop() {
+        if (self.pageYOffset) {
+            var yScroll = self.pageYOffset;
+        } else if (document.documentElement 
+                   && document.documentElement.scrollTop) {
+           
+            var yScroll = document.documentElement.scrollTop;
+        } else if (document.body) {
+            
+            var yScroll = document.body.scrollTop;
+        }
+        return yScroll;
+    }
+    function _AdSame_getBodyScrollLeft() {
+        if (self.pageYOffset) {
+            var xScroll = self.pageXOffset;
+        } else if (document.documentElement 
+                   && document.documentElement.scrollLeft) {
+            // Explorer 6 Strict
+            var xScroll = document.documentElement.scrollLeft;
+        } else if (document.body) {
+            // all other Explorers
+            var xScroll = document.body.scrollLeft;
+        }
+        return xScroll;
+    }
+    var showed = _as_hts("_adsame_fullscreen_"+random, 3600);
+    var clickUrl = "//same.eastmoney.com/c?z=eastmoney&la=0&si=1&cg=103&c=1518&ci=1&or=3968&l=15168&bg=15168&b=17327&u=https%3A%2F%2Fregister.1234567.com.cn%2Freg%2Fstep1%3Fspm%3D100015.b.101";
+    var target = "[TARGET]";
+    var left1 = (_AdSame_getBody().clientWidth-width1)/2;
+    var iniDisplay1 = !showed ? "block" : "none";
+    var id1 = "flashMainId";
+    
+    if(callback==1){var width2=20;var height2=120;}else{var width2=100;var height2=200;}
+    if(callback==1){var top2 = yalign2=="top"?ypadding:_AdSame_getBody().clientHeight-height2-82-ypadding;}else{var top2 = yalign2=="top"?ypadding:_AdSame_getBody().clientHeight-height2-15-ypadding;}
+    var left2 = xalign2=="left"?xpadding2:_AdSame_getBody().clientWidth-width2-xpadding2;
+    var iniDisplay2 = !showed ? showstyle : "block";
+    var id2 = "flashSubId";
+    function getContent(contentType, width, height, creativeUrl, clickUrl, target, id) {
+        if (contentType=="flash") {
+            var html = "<div style='height:"+height+"px;width:"+width+"px;'>";
+            html += "<object height='"+height+"px' ";
+            if (navigator.userAgent.toLowerCase().indexOf('msie')!=-1) {
+                 html += " id='"+id+"' ";
+                 html += " name='"+id+"' ";
+            }
+            html += "width='"+width+"px' ";
+            html += "codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0' ";
+            html += "classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000'>";
+            html += "<param value='"+creativeUrl+"' name='movie' />";
+            html += "<param value='high' name='quality' />";
+            html += "<param value='always' name='allowScriptAccess' />";
+            html += "<param value='transparent' name='wmode' />";
+            if(clicktag){
+                html += "<param value='clickurl="+escape(clickUrl)+"' name='FlashVars' />";
+            }
+            html += "<param value='FlashVars' name='posturl="+escape(this.clickUrl)+"' />";
+            html += "<embed height='"+height+"px' ";
+            if (navigator.userAgent.toLowerCase().indexOf('msie')==-1) {
+                 html += " id='"+id+"' ";
+                 html += " name='"+id+"' ";
+            }
+            html += "width='"+width+"px' ";
+            html += "wmode='transparent' allowScriptAccess='always' ";
+            if(clicktag){
+                html += "FlashVars='clickurl="+escape(clickUrl)+"' ";
+            }
+            html += "type='application/x-shockwave-flash' ";
+            html += "pluginspage='http://www.macromedia.com/go/getflashplayer' ";
+            html += "quality='high' ";
+            html += "FlashVars='posturl="+escape(this.clickUrl)+"' ";
+            html += "src='"+creativeUrl+"' name=''/>";
+            html += "</object>";
+            if(!clicktag){
+                html += "<a href='"+clickUrl+"' target='"+target+"' style='width:"+width+"px;height:"+height+"px;'>"; 
+                html += "<div style='position:absolute;left:0px;top:0px;cursor:pointer;width:"+width+"px;height:"+height+"px;z-index:999;background:white;filter:alpha(opacity=0);-moz-opacity:0;opacity:0;'>";
+                html += "</div></a>";
+            }
+            html += "</div>";
+        } else {
+            var html = "<div style='width:"+width+"px;";
+            html += "height:"+height+"px;";
+            html += "border:none;padding:0px;margin:0px;'>";
+            html += "<a href='"+clickUrl+"' target='"+target+"'>";
+            html += "<img src='"+creativeUrl+"' ";
+            html += "style='width:"+width+"px;height:"+height+"px;";
+            html += "border:none;' /></a></div>";
+        }
+        return html;
+    }
+    var str =  "<div id='_AdSame_divmain' style='position:absolute;";
+    str     += "width:"+width1+"px;height:"+height1+"px;z-index:65535;";
+    str     += "top:"+top1+"px;left:"+left1+"px;display:none;'>";
+    str     += getContent(contentType1,width1,height1,creativeUrl1,clickUrl,target,id1);
+    if (showClsbtn) {
+        str += "<div style='position:absolute;top:"+height1+"px;right:0px;text-align:right;z-index:1000;";
+        str += "width:"+clsbtnWidth+"px;height:"+clsbtnHeight+"px;'>";
+        str += "<img src='"+clsbtnUrl+"' style='cursor:pointer;width:"+clsbtnWidth+"px;height:"+clsbtnHeight+"px;' onclick='close_main();' /></div>";
+    }
+    if (banneradflag) str     += "</div>";
+    if (showRecycle) {
+        str += "<div id='_AdSame_divsub' style='position:absolute;";
+        if(callback==1){str += "width:20px;height:161px;z-index:65535;";}else{str += "width:100px;height:241px;z-index:65535;";}
+        str += "top:"+top2+"px;left:"+left2+"px;display:none;'>";
+        str += getContent(contentType2,width2,height2,creativeUrl2,clickUrl,target,id2);
+        str += "<div style='text-align:center;position:relative;top:0px;left:0px;font-size:9pt;background-color:#FFFFFF;'>"; 
+        if(callback==0){
+        str += "<span style='font-size:9pt;cursor:pointer;' onclick='show_main();'>&#37325;&#25773;</span>&nbsp;|&nbsp;";
+        str += "<span style='font-size:9pt;cursor:pointer;' onclick='close_all();'>&#20851;&#38381;</span></div>";
+        }
+        else{
+        str += "<div><img height='41' width='20' src='//g1.dfcfw.com/g1/201102/20110223094831.jpg' onclick='show_main();' style='cursor:pointer;'></div>";
+        str += "<div><img height='41' width='20' src='//g1.dfcfw.com/g1/201011/20101117182229.jpg' onclick='close_all();' style='cursor:pointer;'></div></div>";
+        }
+      
+        str += "</div>";
+    }
+    document.write("<sc"+"ript language='javascript'>"
+        +"function "+id1+"_DoFSCommand(command, args) {"
+        +"if (command=='close') {close_all();}"
+        +"else if (command=='replay') {show_main();}"
+        +"else if (command=='closeBig') {close_main();}"
+        +"}"
+        +"</sc"+"ript>");
+    document.write("<sc"+"ript language='javascript' "
+        +"For='"+id1+"' "
+        +"Event='FSCommand(command,args)'>"
+        +id1+"_DoFSCommand(command, args);"
+        +"</sc"+"ript>");
+    document.write("<sc"+"ript language='javascript'>"
+        +"function "+id2+"_DoFSCommand(command, args) {"
+        +"if (command=='close') close_all();"
+        +"else if (command=='replay') show_main();"
+        +"else if (command=='closeBig') close_main();"
+        +"}"
+        +"</sc"+"ript>");
+    document.write("<sc"+"ript language='javascript' "
+        +"For='"+id2+"' "
+        +"Event='FSCommand(command,args)'>"
+        +id2+"_DoFSCommand(command, args);"
+        +"</sc"+"ript>");
+    document.write(str);
+    var _AdSame_divmain = document.getElementById('_AdSame_divmain');
+    if (showRecycle) {
+        var _AdSame_divsub = document.getElementById('_AdSame_divsub');
+    }
+    window.setInterval(function() {
+        if (followScroll1) {
+        _AdSame_divmain.style.top = top1+_AdSame_getBodyScrollTop()+"px";
+        }
+        var left = _AdSame_getBodyScrollLeft()+(_AdSame_getBody().clientWidth-width1)/2;
+        _AdSame_divmain.style.left = (left>0?left:0)+"px";
+    }, 200);
+    if (showRecycle) {
+        if (followScroll2) {
+            window.setInterval(function() {
+                if(callback==1)
+            {
+                _AdSame_divsub.style.top = _AdSame_getBodyScrollTop()+ _AdSame_getBody().clientHeight- height2-ypadding-82+"px";
+            }else
+            {
+                _AdSame_divsub.style.top = _AdSame_getBodyScrollTop()+ _AdSame_getBody().clientHeight- height2-ypadding-15+"px";
+            }
+                _AdSame_divsub.style.marginTop ="0px";
+                var left = xalign2=="left"?xpadding2+_AdSame_getBodyScrollLeft():_AdSame_getBodyScrollLeft()+_AdSame_getBody().clientWidth-width2-xpadding2;
+                _AdSame_divsub.style.left = (left>0?left:0)+"px";
+            }, 200);
+        }
+        else
+        {
+            window.setInterval(function() {         
+                var left = xalign2=="left"?xpadding2+_AdSame_getBodyScrollLeft():_AdSame_getBodyScrollLeft()+_AdSame_getBody().clientWidth-width2-xpadding2;
+                _AdSame_divsub.style.left = (left>0?left:0)+"px";
+            }, 200);
+        }
+    }
+    var autoclosehd = null;
+    function show_main() {
+         _AdSame_divmain.style.top = top1+_AdSame_getBodyScrollTop()+"px";
+        if (contentType1=="flash" 
+            && navigator.userAgent.toLowerCase().indexOf("msie")!=-1) {
+            var flash = document.getElementById(id1);
+            flash.gotoframe(1);
+            flash.play();
+        }
+        _AdSame_divmain.style.display="block";
+        if (closeSeconds>0) {
+        window.clearTimeout(autoclosehd);
+            autoclosehd = window.setTimeout(function () {close_main();}, closeSeconds);
+        }
+        if (!alwaysShow && showRecycle) 
+            _AdSame_divsub.style.display="none";
+        
+    }
+    function close_main() {
+        _AdSame_divmain.style.display="none";
+        if (showRecycle)
+            _AdSame_divsub.style.display="block";
+        // only for sohu
+        if (obj) obj.s = 2;
+    }
+    function close_all() {
+        _AdSame_divmain.style.display="none";
+        if (showRecycle)
+            _AdSame_divsub.style.display="none";
+        window.clearTimeout(autoclosehd);
+        // only for sohu
+        if (obj) obj.s = 2;
+    }
+    var obj = null;
+    function call_fc(o) {
+        if (o) obj = o;
+        show_main();
+    }
+    function fc_main(o) {
+        if (typeof call_fc=="function")
+            call_fc(o);
+    }
+    if (typeof AddSchedule=="function") {
+        AD = new ADM("fc", 2);   
+        AddSchedule(AD);
+    } else {
+        if (_AdSame_divmain)
+            _AdSame_divmain.style.display = iniDisplay1;
+        if (_AdSame_divsub)
+            _AdSame_divsub.style.display = iniDisplay2;
+        if (iniDisplay1=="block" && closeSeconds>0) {
+            autoclosehd = window.setTimeout(function() {
+                close_main();
+            }, closeSeconds);
+        }
+    }
+}else{
+    //全屏下推
+    
+function _as_getcv(k) {
+        var c = document.cookie;
+        var end = c.indexOf (k);
+        if (end == -1)
+            return null;
+        var st = end+k.length+1;
+        end = c.indexOf(";", st);
+        if (end == -1)
+            end = c.length;
+        return unescape(c.substring(st, end));
+    }
+    function _as_setcv(k, v, e, p, d, s) {
+        var expdate = new Date();
+        var argv = _as_setcv.arguments;
+        var argc = _as_setcv.arguments.length;
+        var expires = (argc>2)?argv[2]:null;
+        var path = (argc>3)?argv[3]:null;
+        var domain = (argc>4)?argv[4]:null;
+        var secure = (argc>5)?argv[5]:false;
+        if(expires!=null)
+            expdate.setTime(expdate.getTime
+    ()+(expires*1000));
+        var c =  k+"="+escape(v)+"; ";
+        c += ((expires==null)?"":("expires="+expdate.toGMTString
+    ()+"; "));
+        c += ((path==null)?"":("path="+path+"; "));
+        c += ((domain==null)?"":("domain="+domain+"; "));
+        c += ((secure==true)?"secure; ":"");
+        document.cookie = c;
+    }
+    function _as_hts(n, s) {
+        var t = _as_getcv(n);
+        if(!t) {_as_setcv(n, "1", s);return 0;}
+        else {return 1;}
+    }
+    function _AdSame_getBody() {
+        if (document.compatMode=="CSS1Compat") {
+            return (document.documentElement)?
+                document.documentElement:document.body;
+        } else {
+            return document.body;
+        }
+    }
+    function _AdSame_getBodyScrollTop() {
+        if (self.pageYOffset) {
+            var yScroll = self.pageYOffset;
+        } else if (document.documentElement 
+                   && document.documentElement.scrollTop) 
+    {
+            
+            var yScroll = document.documentElement.scrollTop;
+        } else if (document.body) {
+            
+            var yScroll = document.body.scrollTop;      
+        }
+        return yScroll;
+    }
+    function _AdSame_getBodyScrollLeft() {
+        if (self.pageYOffset) {
+            var xScroll = self.pageXOffset;
+        } else if (document.documentElement 
+                   && document.documentElement.scrollLeft) {
+            // Explorer 6 Strict
+            var xScroll = document.documentElement.scrollLeft;
+        } else if (document.body) {
+            // all other Explorers
+            var xScroll = document.body.scrollLeft;
+        }
+        return xScroll;
+    }
+    var showed_pd = _as_hts("_adsame_fullscreen_"+random, 3600);
+    var clickUrl_pd = "//same.eastmoney.com/c?z=eastmoney&la=0&si=1&cg=103&c=1518&ci=1&or=3968&l=15168&bg=15168&b=17327&u=https%3A%2F%2Fregister.1234567.com.cn%2Freg%2Fstep1%3Fspm%3D100015.b.101";
+    var target_pd = "[TARGET]";
+    var left1_pd = (_AdSame_getBody().clientWidth-width1)/2;
+    var iniDisplay1_pd = !showed_pd ? "block" : "none";
+    var id1_pd = "flashMainId";
+    if(callback==1){var width2_pd=20;var height2_pd=120;}else{var 
+    width2_pd=100;var height2_pd=200;}
+    if(callback==1){var top2_pd = yalign2=="top"?
+    ypadding:_AdSame_getBody().clientHeight-height2_pd-82-
+    ypadding;}else{var top2_pd = yalign2=="top"?
+    ypadding:_AdSame_getBody().clientHeight-height2_pd-15-
+    ypadding;}
+    var left2_pd = xalign2=="left"?
+    xpadding2:_AdSame_getBody().clientWidth-width2_pd-xpadding2;
+    var iniDisplay2_pd = !showed_pd ? showstyle : "block";
+    var id2_pd = "flashSubId";
+    var isShown_pd = false;
+    function getContent(contentType, width, height, creativeUrl, 
+    clickUrl, target, id) {
+        if (contentType=="flash") {
+            var html = "<div style='width:"+width+"px;left:0px;top:0px;height:"+height+"px;'>"; 
+            html += "<object height='"+height+"px' ";
+            if (navigator.userAgent.toLowerCase().indexOf('msie')!=-1) {
+                 html += " id='"+id+"' ";
+                 html += " name='"+id+"' ";
+            }
+            html += "width='"+width+"px' ";
+            html += "codebase='http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0' ";
+            html += "classid='clsid:D27CDB6E-AE6D-11cf-96B8-444553540000'>";
+            html += "<param value='"+creativeUrl+"' name='movie' />";
+            html += "<param value='high' name='quality' />";
+            html += "<param value='always' name='allowScriptAccess' />";
+            if(clicktag){
+                html += "<param value='clickurl="+escape(clickUrl)+"' name='FlashVars' />";
+            }
+            html += "<param name='wmode' value='transparent' />";
+            html += "<param name='FlashVars' value='posturl="+escape(clickUrl)+"' />";
+            html += "<embed height='"+height+"px' ";
+            if (navigator.userAgent.toLowerCase().indexOf('msie')==-1) {
+                 html += " id='"+id+"' ";
+                 html += " name='"+id+"' ";
+            }
+            html += "width='"+width+"px' ";
+            html += "wmode='transparent' allowScriptAccess='always' ";
+            if(clicktag) {
+                html += "FlashVars='clickurl="+escape(clickUrl)+"' ";
+            }
+            html += "type='application/x-shockwave-flash' ";
+            html += "pluginspage='http://www.macromedia.com/go/getflashplayer' ";
+            html += "quality='high' ";
+            html += "FlashVars='posturl="+escape(clickUrl)+"' ";
+            html += "src='"+creativeUrl+"' name=''/>";
+            html += "</object>";
+            html += "</div>";
+            if(!clicktag){
+                html += "<a href='"+clickUrl+"' target='"+target+"' style='width:"+width+"px;height:"+height+"px;'>"; 
+                html += "<div style='position:absolute;left:0px;top:0px;cursor:pointer;width:"+width+"px;height:"+height+"px;z-index:999;background:white;filter:alpha(opacity=0);-moz-opacity:0;opacity:0;'>";
+                html += "</div></a>";
+            }
+        } else {
+            var html = "<div style='width:"+width+"px;";
+            html += "height:"+height+"px;";
+            html += "border:none;padding:0px;margin:0px;'>";
+            html += "<a href='"+clickUrl+"' target='"+target+"'>";
+            html += "<img src='"+creativeUrl+"' ";
+            html += "style='width:"+width+"px;height:"+height+"px;";
+            html += "border:none;' /></a></div>";
+        }
+        
+        return html;
+    }
+    var str_pd = "";
+    if (showRecycle) {
+        str_pd  += "<div id='_AdSame_divsub_pd' style='position:absolute;";
+        if(callback==1){str += "width:20px;height:161px;z-index:65535;";}else{str += "width:100px;height:241px;z-index:65535;";}
+        str_pd  += "top:"+top2_pd+"px;left:"+left2_pd+"px;display:"+iniDisplay2_pd+";'>";
+        str_pd  += getContent(contentType2,width2_pd,height2_pd,creativeUrl2,clickUrl_pd,target_pd,id2_pd);
+        str_pd += "<div style='text-align:center;position:relative;top:0px;left:0px;font-size:9pt;'>";
+        if(callback==0){
+        str_pd += "<span style='font-size:9pt;cursor:pointer;' onclick='show_main_pd();'>&#37325;&#25773;</span>&nbsp;|&nbsp;";
+        str_pd += "<span style='font-size:9pt;cursor:pointer;' onclick='close_all_pd();'>&#20851;&#38381;</span></div>";
+        }
+        else{
+        str_pd += "<div><img height='41' width='20' src='//g1.dfcfw.com/g1/201102/20110223094831.jpg' onclick='show_main_pd();' style='cursor:pointer;'></div>";
+        str_pd += "<div><img height='41' width='20' src='//g1.dfcfw.com/g1/201011/20101117182229.jpg' onclick='close_all_pd();' style='cursor:pointer;'></div></div>";
+        }
+        
+        str_pd  += "</div>";
+    }
+    document.write("<sc"+"ript language='javascript'>"
+        +"function "+id1_pd+"_DoFSCommand(command, args) {"
+        +"if (command=='close') {close_all_pd();}"
+        +"else if (command=='replay') {show_main_pd();}"
+        +"else if (command=='closeBig') {close_main_pd();}"
+        +"}"
+        +"</sc"+"ript>");
+    document.write("<sc"+"ript language='javascript' "
+        +"For='"+id1_pd+"' "
+        +"Event='FSCommand(command,args)'>"
+        +id1_pd+"_DoFSCommand(command, args);"
+        +"</sc"+"ript>");
+    document.write("<sc"+"ript language='javascript'>"
+        +"function "+id2_pd+"_DoFSCommand(command, args) {"
+        +"if (command=='close') close_all_pd();"
+        +"else if (command=='replay') show_main_pd();"
+        +"else if (command=='closeBig') close_main_pd();"
+        +"}"
+        +"</sc"+"ript>");
+    document.write("<sc"+"ript language='javascript' "
+        +"For='"+id2_pd+"' "
+        +"Event='FSCommand(command,args)'>"
+        +id2_pd+"_DoFSCommand(command, args);"
+        +"</sc"+"ript>");
+    document.write(str_pd);
+    if (showRecycle) {
+        var _AdSame_divsub_pd = document.getElementById('_AdSame_divsub_pd');
+        window.setInterval(function() {
+            if (followScroll2) {
+                _AdSame_divsub_pd.style.top = top2_pd+_AdSame_getBodyScrollTop()+"px";
+            }
+            _AdSame_divsub_pd.style.left = xalign2=="left"?xpadding2:_AdSame_getBody().clientWidth-(callback==1?20:100)-xpadding2+"px";
+        }, 200);
+    }   
+    var divobj_pd = document.createElement("DIV");
+    divobj_pd.style.width = width1+"px";
+    divobj_pd.style.height = "1px";
+    divobj_pd.style.marginLeft = "auto";
+    divobj_pd.style.marginRight = "auto";
+    divobj_pd.style.overflow = "hidden";
+    divobj_pd.style.zIndex = 65535;
+    divobj_pd.style.position = "relative";
+    var str = getContent
+    (contentType1,width1,height1,creativeUrl1,clickUrl_pd
+    ,target_pd,id1_pd);
+    if (banneradflag) str += "";
+    if (showClsbtn) {
+       str += "<div id='cls_btn' style='position:absolute;top:"+(height1-clsbtnHeight)+"px;right:0px;text-align:right;z-index:1000;";
+       str += "width:"+clsbtnWidth+"px;height:"+clsbtnHeight+"px;'>";
+        str += "<img src='"+clsbtnUrl+"' style='cursor:pointer;width:"+clsbtnWidth+"px;height:"+clsbtnHeight+"px;' onclick='close_main_pd();' /></div>";    
+    }
+    divobj_pd.innerHTML = str;
+    if (targetDivId_pd) {
+        var beforeTarget_pd = document.getElementById
+    (targetDivId_pd);
+    } else {
+        var beforeTarget_pd = document.body.firstChild;
+    }
+    beforeTarget_pd.parentNode.insertBefore(divobj_pd, 
+    beforeTarget_pd);
+    var autoclosehd_pd = null;
+    function show_main_pd() {   
+        if (isShown_pd) return;
+        isShown_pd = true;
+        divobj_pd.style.display="block";
+        if (!alwaysShow && showRecycle)
+            _AdSame_divsub_pd.style.display="none";
+        if (contentType1=="flash" 
+            && navigator.userAgent.toLowerCase().indexOf("msie")!=-1) {
+            var flash = document.getElementById(id1_pd);
+            flash.gotoframe(1);
+            flash.play();
+        }
+        var count = 0;
+        var gap = parseInt(height1/20);
+        divobj_pd.style.height = height1+"px";  
+        if (closeSeconds>0) {
+            window.clearTimeout(autoclosehd_pd);
+            autoclosehd_pd = window.setTimeout(function () {close_main_pd();}, closeSeconds);
+        }
+    }
+    function close_main_pd() {  
+        if (!isShown_pd) return;
+        isShown_pd = false;
+        var count = 0;
+        var gap = parseInt(height1/20);
+        isShown_pd = false;
+        divobj_pd.style.height = "1px";
+        divobj_pd.style.display="none";
+        if (showRecycle)
+            _AdSame_divsub_pd.style.display="block";
+    }
+    function close_all_pd() {
+        if (showRecycle)
+            _AdSame_divsub_pd.style.display="none";
+        window.clearTimeout(autoclosehd_pd);
+        divobj_pd.style.display="none";
+    }
+    function isloaded(){
+        var f = document.getElementById("flashMainId");
+        if ((!f) 
+            || typeof f.PercentLoaded=="undefined") {
+            return false;
+        }
+        if (parseInt(f.PercentLoaded())==100) {
+            return true;
+        }
+    }
+    if(contentType1 == "flash"){
+        var max = 100, c = 0;
+        var hd = window.setInterval(function (){
+                if (isloaded() || ++c>max) {
+                    window.clearInterval(hd);
+            if (!showed_pd) {
+                show_main_pd();
+            } else {
+                divobj_pd.style.display="none";
+                close_main_pd();
+            }
+                }
+            }, 100);
+    }
+    else{
+        if (!showed_pd) {
+        show_main_pd();
+            } else {
+                divobj_pd.style.display="none";
+                close_main_pd();
+            }
+    }
+}

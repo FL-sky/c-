@@ -1,0 +1,9 @@
+#pragma once
+#include "XFtpTask.h"
+class XFtpUSER :
+    public XFtpTask
+{
+    //Ω‚Œˆ–≠“È
+    virtual void Parse(std::string type, std::string msg);
+};
+
