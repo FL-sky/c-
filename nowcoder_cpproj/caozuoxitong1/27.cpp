@@ -43,8 +43,9 @@ int main()
     chdir("/");  //第四步:重设文件创建掩模
     umask(0);    //第五步:关闭打开的文件描述符
     for (int i = 0; i < MAXFILE; ++i)
+    {
         close(i);
-    sleep(2);
-}
-return 0;
+        sleep(2);
+    }
+    return 0;
 }
