@@ -21,7 +21,7 @@ public:
         p = NULL;
         len = 0;
     }
-    B(const B &b) //push_back调用
+    B(const B &b) // push_back调用
     {
         cout << "copy B()" << endl;
         if (p)
@@ -30,7 +30,7 @@ public:
             p = new char[len + 1];
             memcpy(p, b.p, len);
             p[len] = 0;
-            //delete b.p;
+            // delete b.p;
         }
     }
     B(const B &&)
