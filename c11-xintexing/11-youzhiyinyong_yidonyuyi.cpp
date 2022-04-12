@@ -14,9 +14,9 @@ class A
 public:
     int *pointer;
     int id;
-    A() : pointer(new int(1))
+    A() : pointer(new int(id = ++idx))
     {
-        id = ++idx;
+        // id = ++idx;
         std::cout << "构造" << pointer << std::endl;
     }
     // 无意义的对象拷贝
@@ -46,42 +46,40 @@ A return_rvalue(bool test)
     else
         return b;
 }
-int main0()
-{
-    // A c;
-    // A obj = c;
-    A obj = return_rvalue(false);
-    std::cout << "obj:" << std::endl;
-    std::cout << obj.pointer << std::endl;
-    std::cout << *obj.pointer << std::endl;
-
-    return 0;
-}
-
-// 在上面的代码中：
-
-// 1. 首先会在 `return_rvalue` 内部构造两个 `A` 对象，于是获得两个构造函数的输出；
-// 2. 函数返回后，产生一个将亡值，被 `A` 的移动构造（`A(A&&)`）引用，从而延长生命周期，并将这个右值中的指针拿到，保存到了 `obj` 中，而将亡值的指针被设置为 `nullptr`，防止了这块内存区域被销毁。
-
-// 从而避免了无意义的拷贝构造，加强了性能。再来看看涉及标准库的例子：
-
 int main()
 {
+    {
+        // A c;
+        // A obj = c;
+        A obj = return_rvalue(false);
+        std::cout << "obj:" << std::endl;
+        std::cout << obj.pointer << std::endl;
+        std::cout << *obj.pointer << std::endl;
+    }
 
-    std::string str = "Hello world.";
-    std::vector<std::string> v;
+    // 在上面的代码中：
 
-    // 将使用 push_back(const T&), 即产生拷贝行为
-    v.push_back(str);
-    // 将输出 "str: Hello world."
-    std::cout << "str: " << str << std::endl;
+    // 1. 首先会在 `return_rvalue` 内部构造两个 `A` 对象，于是获得两个构造函数的输出；
+    // 2. 函数返回后，产生一个将亡值，被 `A` 的移动构造（`A(A&&)`）引用，从而延长生命周期，并将这个右值中的指针拿到，保存到了 `obj` 中，而将亡值的指针被设置为 `nullptr`，防止了这块内存区域被销毁。
 
-    // 将使用 push_back(const T&&), 不会出现拷贝行为
-    // 而整个字符串会被移动到 vector 中，所以有时候 std::move 会用来减少拷贝出现的开销
-    // 这步操作后, str 中的值会变为空
-    v.push_back(std::move(str));
-    // 将输出 "str: "
-    std::cout << "str: " << str << std::endl;
+    // 从而避免了无意义的拷贝构造，加强了性能。再来看看涉及标准库的例子：
 
+    {
+
+        std::string str = "Hello world.";
+        std::vector<std::string> v;
+
+        // 将使用 push_back(const T&), 即产生拷贝行为
+        v.push_back(str);
+        // 将输出 "str: Hello world."
+        std::cout << "str: " << str << std::endl;
+
+        // 将使用 push_back(const T&&), 不会出现拷贝行为
+        // 而整个字符串会被移动到 vector 中，所以有时候 std::move 会用来减少拷贝出现的开销
+        // 这步操作后, str 中的值会变为空
+        v.push_back(std::move(str));
+        // 将输出 "str: "
+        std::cout << "str: " << str << std::endl;
+    }
     return 0;
 }

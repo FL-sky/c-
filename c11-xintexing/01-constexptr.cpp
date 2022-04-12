@@ -3,8 +3,8 @@ using namespace std;
 
 #define LEN 10
 //时期:
-//1．编译期cpP --编译器--> exe
-//2．运行期双击exe,exe被执行的时期
+// 1．编译期cpP --编译器--> exe
+// 2．运行期双击exe,exe被执行的时期
 const int len_foo()
 {
     return 5;
@@ -12,27 +12,52 @@ const int len_foo()
 
 constexpr int len_foo1(int a, int b)
 {
-    //a = 5, b = 6;
+    // a = 5, b = 6;
     return (a ^ b) + 1;
 }
 
-constexpr int size()
-{
+constexpr int size() ///<一个 constexpr 函数只能包含一个 return 语句C / C++(2387)c++ 11>
+{                    /*
+                    语句不能出现在 constexpr 函数中C/C++(2388) c++11
+                    */
     int a = 2, b = 3, c = 5;
-    a = 7;
-    // if (rand() % 2)
-    //     return a ^ b | c;
-    return a + b + c;
+    // a = 7;
+    //  if (rand() % 2)
+    //      return a ^ b | c;
+    // return a + b + c;
+    return len_foo1(5, 7);
 }
+
+int j = 0;
+constexpr int i = 42; // i的类型是整型常量
+                      // i和j都必须定义在函数体之外
+void s1()
+{
+    constexpr const int *p = &i; // p是常量指针，指向整型常量i
+    constexpr int *p1 = &j;      // p1是常量指针，指向整数j
+    *p1 += 5;
+    // ++p1; ////表达式必须是可修改的左值C/C++(137)
+    cout << *p1 << endl;
+}
+
+constexpr int fibonacci(const int n)
+{ //<一个 constexpr 函数只能包含一个 return 语句C/C++(2387) c++11>
+    if (n == 1)
+        return 1;
+    if (n == 2)
+        return 1;
+    return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
 int main()
 {
     //局部变量，在栈上开辟空间, r在编译期间分配的
     char arr_1[10];
     char arr_2[LEN];
 
-    //int len = 5;
-    //char arr_3[len]; //编译器在运行期才能确定该变量的大小,从而分配空间
-    //char arr_3[len + 5]; //非法
+    // int len = 5;
+    // char arr_3[len]; //编译器在运行期才能确定该变量的大小,从而分配空间
+    // char arr_3[len + 5]; //非法
     ///常量表达式
     // char arr_5[len_foo() + 5];//非法
     char arr6[len_foo1(9, 6)];
@@ -69,6 +94,9 @@ constexpr int *p1 = &j;             //p1是常量指针，指向整数j
     // int null = 0, *p = null;
 
     const int null = 0;
-    int *p = null;
+    int *p = (int *)null;
+    //-----------
+    int canshu = 10;
+    fibonacci(canshu);
     return 0;
 }

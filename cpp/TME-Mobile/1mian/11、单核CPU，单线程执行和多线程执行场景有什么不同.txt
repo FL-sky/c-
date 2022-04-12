@@ -1,0 +1,2 @@
+对于多线程程序，单核cpu与多核cpu是怎么工作的
+https://www.cnblogs.com/caihuafeng/p/5438753.html

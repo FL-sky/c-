@@ -1,3 +1,5 @@
+/// https://blog.csdn.net/linuxheik/article/details/80449059
+
 #include <iostream>
 using namespace std;
 
@@ -28,15 +30,23 @@ private:
 int main()
 {
     char mem[100];
-    mem[0] = 'A';
-    mem[1] = '\0';
-    mem[2] = '\0';
-    mem[3] = '\0';
+    for (int i = 0; i < 100; i++)
+    {
+        mem[i] = 'A' + i % 52;
+    }
     cout << (void *)mem << endl;
     A *p = new (mem) A;
     cout << p << endl;
     p->show();
     cout << "mem[4]=" << mem[4] << endl;
+    //
+    char *q = (char *)p;
+    for (int i = 0; i < 100; i++)
+    {
+        putchar(q[i]);
+    }
+    //
     p->~A();
+
     return 0;
 }

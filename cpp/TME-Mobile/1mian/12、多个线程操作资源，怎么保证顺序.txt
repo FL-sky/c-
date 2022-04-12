@@ -1,0 +1,7 @@
+保证多线程顺序执行，四种方案，你知道几种？
+https://baijiahao.baidu.com/s?id=1702989684713453462&wfr=spider&for=pc
+
+
+C++ 多线程按顺序执行函数
+https://www.csdn.net/tags/Ntjacg0sODI2Mi1ibG9n.html
+

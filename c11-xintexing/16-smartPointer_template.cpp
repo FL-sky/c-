@@ -159,17 +159,19 @@ int main(int argc, char *argv[])
 {
     CStudent *pStu = new CStudent();
 
-    //CRefCount<CStudent> ref(pStu);
+    // CRefCount<CStudent> ref(pStu);
 
     CSmartPtr<CStudent> sp1(pStu);
     CSmartPtr<CStudent> sp2(new CStudent()); //拷贝构造???
     CSmartPtr<CStudent> sp3(sp2);
     CSmartPtr<CStudent> sp4;
     sp4 = sp2;
-    //sp2 = sp1; //运算符重载
+    // sp2 = sp1; //运算符重载
 
     //
     CSmartPtr<CTest> sp5(new CTest);
 
+    CSmartPtr<int> pi(new int(10));
+    cout << *pi << endl;
     return 0;
 }

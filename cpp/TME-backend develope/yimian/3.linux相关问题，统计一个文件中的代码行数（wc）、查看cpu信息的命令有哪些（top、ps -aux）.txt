@@ -1,0 +1,224 @@
+A.Linux统计文件个数或是代码行数
+https://www.cnblogs.com/yinzx/p/4658535.html
+
+
+统计指定后缀名的文件总个数命令：
+find . -name *.cpp | wc -l
+统计一个目录下代码总行数以及单个文件行数：
+find . -name *.h | xargs wc -l
+linux统计文件夹中文件数目
+第一种方法：
+ls -l|grep “^-”|wc -l
+ls -l 长列表输出该目录下文件信息(注意这里的文件，不同于一般的文件，可能是目录、链接、设备文件等)。如果ls -lR|grep “^-”|wc-l则可以连子目录下的文件一起统计。
+grep ^- 这里将长列表输出信息过滤一部分，只保留一般文件，如果只保留目录就是 ^d
+wc -l 统计输出信息的行数，因为已经过滤得只剩一般文件了，所以统计结果就是一般文件信息的行数，又由于一行信息对应一个文件，所以也就是文件的个数。
+第二种方法：
+find ./ -type f|wc -l
+由于默认find会去子目录查找，如果只想查找当前目录的文件用
+需要说明的是第二种方法会比第一种方法快很多，尤其是也统计子目录时。
+
+
+Linux xargs 命令
+https://www.runoob.com/linux/linux-comm-xargs.html
+
+
+xargs（英文全拼： eXtended ARGuments）是给命令传递参数的一个过滤器，也是组合多个命令的一个工具。
+
+xargs 可以将管道或标准输入（stdin）数据转换成命令行参数，也能够从文件的输出中读取数据。
+
+xargs 也可以将单行或多行文本输入转换为其他格式，例如多行变单行，单行变多行。
+
+xargs 默认的命令是 echo，这意味着通过管道传递给 xargs 的输入将会包含换行和空白，不过通过 xargs 的处理，换行和空白将被空格取代。
+
+xargs 是一个强有力的命令，它能够捕获一个命令的输出，然后传递给另外一个命令。
+
+之所以能用到这个命令，关键是由于很多命令不支持|管道来传递参数，而日常工作中有有这个必要，所以就有了 xargs 命令，例如：
+
+find /sbin -perm +700 |ls -l       #这个命令是错误的
+find /sbin -perm +700 |xargs ls -l   #这样才是正确的
+xargs 一般是和管道一起使用。
+
+命令格式：
+
+somecommand |xargs -item  command
+
+
+
+--------------------------
+linux管道符“|”详解
+https://www.cnblogs.com/atai/p/14402969.html
+
+管道符（pipe）用“|”这个界定符号表示，如果需要对linux命令的输出结果进行再次处理，就可以使用管道符+管道命令解决。
+
+例如通过ps命令可以查看系统中的进程，但如果需要查看指定进程，就需要在ps命令返回的结果中进行筛选，如查看java进程：
+
+1
+ps -aux | grep java
+
+
+ 管道符详细介绍
+ 管道符“|”仅能处理由前一个命令执行后传来的正确信息，如果命令执行异常，无法对异常信息进行处理。
+
+管道符的用法如下：
+
+1
+bash命令 | 管道命令
+以上用法中提到的“管道命令”，是指该命令必须能够接收标准输出，这样的命令才是管道命令，例如grep，less，head，tail等命令。以下列出部分管道命令的分类。
+
+1. 选取命令：cut，grep
+
+2. 排序命令：sort，wc，uniq
+
+3. 双向重定向：tee
+
+4. 字符转换命令：tr，col，join，paste，expand
+
+5. 切割命令：split
+
+6. 参数代换命令：xargs
+
+
+
+
+===========================
+
+
+B.查看CPU信息的常用命令
+https://www.jianshu.com/p/726452d1c2c3
+
+一、查看CPU信息的常用命令
+总核数 = 物理CPU个数 X 每颗物理CPU的核数
+总逻辑CPU数 = 物理CPU个数 X 每颗物理CPU的核数 X 超线程数
+
+1、查看CPU信息（型号）:
+cat /proc/cpuinfo | grep name | sort | uniq
+2、查看物理CPU总个数
+cat /proc/cpuinfo | grep "physical id"| sort|uniq| wc -l
+3、 查看物理CPU数目
+cat /proc/cpuinfo | grep "physical id"
+4、查看每个物理CPU中core的个数(即核数)
+cat /proc/cpuinfo | grep "core id"| sort|uniq| wc -l
+或者：cat /proc/cpuinfo| grep "cpu cores"| uniq
+5、查看逻辑CPU的个数，即并行所支持的线程数
+cat /proc/cpuinfo | grep "processor"| sort|uniq| wc -l
+6、综合直接查看CUP的信息
+lscpu
+7、如何查看linux 系统内存大小的信息，可以查看总内存，剩余内存，可使用内存等信息
+cat /proc/meminfo
+
+
+
+
+>B.linux查看进程命令是什么
+https://www.php.cn/linux-462905.html
+
+
+ps top pstree pgrep
+
+ps aux 命令和 top命令
+https://blog.csdn.net/qq_38570571/article/details/82703621
+
+
+ps命令
+
+ps命令用于查看系统中的进程状态，格式为“ps [参数]”。
+
+估计读者在第一次执行这个命令时都要惊呆一下—怎么会有这么多输出值，这可怎么看得过来？其实，刘遄老师通常会将ps命令与第3章的管道符技术搭配使用，用来抓取与某个指定服务进程相对应的PID号码。
+ps命令的常见参数以及作用如表2-6所示。
+
+
+表2-6                                                  ps命令的参数以及作用
+
+参数	作用
+-a	显示所有进程（包括其他用户的进程）
+-u	用户以及其他详细信息
+-x	显示没有控制终端的进程
+
+
+Linux系统中时刻运行着许多进程，如果能够合理地管理它们，则可以优化系统的性能。在Linux系统中，有5种常见的进程状态，分别为运行、中断、不可中断、僵死与停止，其各自含义如下所示。
+
+R（运行）：进程正在运行或在运行队列中等待。
+
+S（中断）：进程处于休眠中，当某个条件形成后或者接收到信号时，则脱离该   状态。
+
+D（不可中断）：进程不响应系统异步信号，即便用kill命令也不能将其中断。
+
+Z（僵死）：进程已经终止，但进程描述符依然存在, 直到父进程调用wait4()系统函数后将进程释放。
+
+T（停止）：进程收到停止信号后停止运行。
+
+
+当执行ps aux命令后通常会看到如表2-7所示的进程状态，表2-7中只是列举了部分输出值，而且正常的输出值中不包括中文注释。
+
+表2-7                                                             进程状态
+
+USER	        PID	        %CPU	        %MEM	VSZ	                        RSS	                    TTY	        STAT	    START	        TIME	        COMMAND
+进程的所有者	进程ID号	运算器占用率	内存占用率	虚拟内存使用量(单位是KB)	占用的固定内存量(单位是KB)	所在终端	进程状态	被启动的时间	实际使用CPU的时间	命令名称与参数
+root	1	0.0	0.4	53684	7628	?	Ss	07:22	0:02	/usr/lib/systemd/systemd
+root	2	0.0	0.0	0	0	?	S	07:22	0:00	[kthreadd]
+root	3	0.0	0.0	0	0	?	S	07:22	0:00	[ksoftirqd/0]
+root	5	0.0	0.0	0	0	?	S<	07:22	0:00	[kworker/0:0H]
+root	7	0.0	0.0	0	0	?	S	07:22	0:00	[migration/0]
+ 	………………	省略部分输出信息	………………
+
+
+7．top命令
+
+top命令用于动态地监视进程活动与系统负载等信息，其格式为top。
+
+top命令相当强大，能够动态地查看系统运维状态，完全将它看作Linux中的“强化版的Windows任务管理器”。top命令的运行界面如图2-6所示。
+
+
+图2-6  top命令的运行界面
+
+fx@fx-TMP255-MG:~$ top
+top - 23:10:20 up  8:44,  2 users,  load average: 0.31, 0.34, 0.36
+任务: 259 total,   1 running, 257 sleeping,   0 stopped,   1 zombie
+%Cpu(s):  0.7 us,  0.5 sy,  0.0 ni, 98.6 id,  0.0 wa,  0.0 hi,  0.2 si,  0.0 st
+MiB Mem :   7830.6 total,    997.5 free,   1762.2 used,   5070.9 buff/cache
+MiB Swap:   2048.0 total,   2048.0 free,      0.0 used.   5474.5 avail Mem 
+
+ 进程号 USER      PR  NI    VIRT    RES    SHR    %CPU  %MEM     TIME+ COMMAND                                
+  13836 fx        20   0   16.4g 118036  75408 S   2.0   1.5   0:52.21 chrome                                 
+  14945 fx        20   0   24.5g 176352 113152 S   2.0   2.2   0:33.61 chrome                                 
+   9929 fx        20   0 1042524 115420  65060 S   0.3   1.4   2:58.71 Xorg                                   
+  10036 fx         9 -11 1674476  19596  14896 S   0.3   0.2   0:25.91 pulseaudio                             
+  10221 fx        20   0  768008  33956  23192 S   0.3   0.4   0:10.73 gsd-media-keys                         
+  14570 fx        20   0   16.3g  72868  53096 S   0.3   0.9   0:02.16 code                                   
+  14863 root      20   0       0      0      0 I   0.3   0.0   0:02.35 kworker/2:1-events                     
+  15540 fx        20   0   15132   4020   3344 R   0.3   0.1   0:00.17 top                                    
+  15546 root      20   0       0      0      0 I   0.3   0.0   0:00.03 kworker/0:0-events                     
+      1 root      20   0  168176  11540   8340 S   0.0   0.1   0:03.64 systemd                                
+      2 root      20   0       0      0      0 S   0.0   0.0   0:00.02 kthreadd                               
+      3 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 rcu_gp                                 
+      4 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 rcu_par_gp                             
+      6 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/0:0H-events_highpri            
+      9 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 mm_percpu_wq                           
+     10 root      20   0       0      0      0 S   0.0   0.0   0:00.00 rcu_tasks_rude_                        
+     11 root      20   0       0      0      0 S   0.0   0.0   0:00.00 rcu_tasks_trace                        
+     12 root      20   0       0      0      0 S   0.0   0.0   0:00.70 ksoftirqd/0                            
+     13 root      20   0       0      0      0 I   0.0   0.0   0:12.95 rcu_sched                              
+     14 root      rt   0       0      0      0 S   0.0   0.0   0:00.20 migration/0                            
+     15 root     -51   0       0      0      0 S   0.0   0.0   0:00.00 idle_inject/0                          
+     16 root      20   0       0      0      0 S   0.0   0.0   0:00.00 cpuhp/0                                
+     17 root      20   0       0      0      0 S   0.0   0.0   0:00.00 cpuhp/1                                
+     18 root     -51   0       0      0      0 S   0.0   0.0   0:00.00 idle_inject/1                          
+     19 root      rt   0       0      0      0 S   0.0   0.0   0:00.32 migration/1                            
+     20 root      20   0       0      0      0 S   0.0   0.0   0:00.54 ksoftirqd/1                            
+     22 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker/1:0H-events_highpri            
+     23 root      20   0       0      0      0 S   0.0   0.0   0:00.00 cpuhp/2                                
+     24 root     -51   0       0      0      0 S   0.0   0.0   0:00.00 idle_inject/2                          
+     25 root      rt   0       0      0      0 S   0.0   0.0   0:00.34 migration/2                            
+
+
+在图2-6中，top命令执行结果的前5行为系统整体的统计信息，其所代表的含义如下。
+
+第1行：系统时间、运行时间、登录终端数、系统负载（三个数值分别为1分钟、5分钟、15分钟内的平均值，数值越小意味着负载越低）。
+
+第2行：进程总数、运行中的进程数、睡眠中的进程数、停止的进程数、僵死的进程数。
+
+第3行：用户占用资源百分比、系统内核占用资源百分比、改变过优先级的进程资源百分比、空闲的资源百分比等。其中数据均为CPU数据并以百分比格式显示，例如“97.1 id”意味着有97.1%的CPU处理器资源处于空闲。
+
+第4行：物理内存总量、内存使用量、内存空闲量、作为内核缓存的内存量。
+
+第5行：虚拟内存总量、虚拟内存使用量、虚拟内存空闲量、已被提前加载的内存量。

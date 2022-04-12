@@ -68,12 +68,12 @@ protected:
     CRefCount *m_pRef;
 };
 
-#define mydestroy() \
-    ;               \
-    this->mydestroy();
-#define myrelease() \
-    ;               \
-    this->myrelease();
+// #define mydestroy() \
+//     ;               \
+//     this->mydestroy();
+// #define myrelease() \
+//     ;               \
+//     this->myrelease();
 //#define x.m_pRef x.m_pRef
 //#define m_pRef this->m_pRef
 //#define x.m_Ptr x.m_Ptr
@@ -114,8 +114,10 @@ public:
         if (this->m_pRef != nullptr && this->m_pRef->decUsed() == 0)
         {
 
-            mydestroy();
-            myrelease();
+            // mydestroy();
+            // myrelease();
+            this->mydestroy();
+            this->myrelease();
         }
 
         this->m_Ptr = obj.m_Ptr;
@@ -136,8 +138,10 @@ public:
     {
         if ((this->m_pRef) != nullptr && (this->m_pRef)->decUsed() == 0)
         {
-            mydestroy();
-            myrelease();
+            this->mydestroy();
+            this->myrelease();
+            // mydestroy();
+            // myrelease();
         }
     }
 
@@ -172,7 +176,7 @@ public:
 
     CMyWeakPtr(CStrongPtr<T> &obj)
     {
-        //myrelease();
+        // myrelease();
 
         this->m_Ptr = obj.m_Ptr;
         obj.m_pRef->incWeak();
@@ -181,8 +185,8 @@ public:
 
     CMyWeakPtr<T> &operator=(CStrongPtr<T> &obj)
     {
-        myrelease();
-
+        // myrelease();
+        this->myrelease();
         this->m_Ptr = obj.m_Ptr;
         obj.m_pRef->incWeak();
         this->m_pRef = obj.m_pRef;
@@ -200,7 +204,8 @@ public:
 
     ~CMyWeakPtr()
     {
-        myrelease();
+        // myrelease();
+        this->myrelease();
     }
 
     CStrongPtr<T> &lock()
@@ -231,7 +236,12 @@ class CSon;
 class CTest
 {
 public:
-    void set(CStrongPtr<CSon> p2)
+    // void set(CStrongPtr<CSon> p2)
+    // {
+    //     m_p1 = p2;
+    // }
+
+    void set(CStrongPtr<CSon> &p2)
     {
         m_p1 = p2;
     }
@@ -242,7 +252,11 @@ public:
 class CSon
 {
 public:
-    void set(CStrongPtr<CTest> p2)
+    // void set(CStrongPtr<CTest> p2)
+    // {
+    //     m_p1 = p2;
+    // }
+    void set(CStrongPtr<CTest> &p2)
     {
         m_p1 = p2;
     }
@@ -252,18 +266,24 @@ public:
 
 void foo()
 {
-    CTest *father = new CTest();
-    CSon *son = new CSon();
+    int x;
+    {
+        CTest *father = new CTest();
+        CSon *son = new CSon();
 
-    CStrongPtr<CTest> ptrFather(father);
-    CStrongPtr<CSon> ptrSon(son);
+        CStrongPtr<CTest> ptrFather(father);
+        CStrongPtr<CSon> ptrSon(son);
 
-    father->set(ptrSon);
-    son->set(ptrFather);
+        father->set(ptrSon);
+        son->set(ptrFather);
+        x = 1 + 2;
+    }
+    int y = x * x;
 }
 
 int main()
 {
+
     foo();
 
     return 0;

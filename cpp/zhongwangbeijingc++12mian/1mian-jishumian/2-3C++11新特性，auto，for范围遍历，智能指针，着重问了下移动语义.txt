@@ -1,0 +1,42 @@
+https://www.cnblogs.com/QG-whz/p/4951177.html
+
+C++11特性：auto关键字
+
+变量的自动类型推断
+
+
+
+auto的用法
+上面举的这个例子很简单，在真正编程的时候也不建议这样来使用auto，直接写出变量的类型更加清晰易懂。下面列举auto关键字的正确用法。
+
+<用于代替冗长复杂、变量使用范围专一的变量声明>
+
+#include<string>
+#include<vector>
+int main()
+{
+    std::vector<std::string> vs;
+    for (auto i = vs.begin(); i != vs.end(); i++)
+    {
+        //..
+    }
+}///for循环中的i将在编译时自动推导其类型，而不用我们显式去定义那长长的一串。
+
+在定义模板函数时，用于声明依赖模板参数的变量类型。
+
+template <typename _Tx, typename _Ty>
+void Multiply(_Tx x, _Ty y)
+{
+    // std::cout << x * y << endl;
+    //若不使用auto变量来声明v，那这个函数就难定义啦，不到编译的时候，谁知道x*y的真正类型是什么呢
+    //然而事实上可以如上面写
+    auto v = x * y;
+    std::cout << v;
+}
+
+模板函数依赖于模板参数的返回值
+template <typename _Tx, typename _Ty>
+auto multiply(_Tx x, _Ty y)->decltype(_Tx*_Ty)
+{
+    return x*y;
+}

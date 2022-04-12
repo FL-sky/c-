@@ -35,9 +35,24 @@ void foo_construct2()
     std::shared_ptr<int> sptr4 = std::make_shared<int>(5);
 }
 
+void foo_construct3()
+{
+    int *p = nullptr;
+    {
+        p = new int(3);
+
+        std::shared_ptr<int> sptr(p);
+        std::shared_ptr<int> sptr2(new int(4));
+        {
+            std::shared_ptr<int> sptr3 = sptr2;
+        }
+    } ///出了作用域后，p被销毁
+    std::shared_ptr<int> sptr4 = std::make_shared<int>(5);
+}
+
 //**2. 注意事项： * *
 //
-//1. 如果用同一个指针去初始化两个shared_ptr时，则引用计数仍然会出错：
+// 1. 如果用同一个指针去初始化两个shared_ptr时，则引用计数仍然会出错：
 
 void foo_test()
 {
@@ -53,7 +68,7 @@ void foo_test()
 } //异常
 //显然出了最里面的作用域之后，sptr2对象就已经释放了，此时，对于sptr2来说，p的引用计数为0，所有p被释放，但是实际上sptr还存在，所以再释放sptr时，就会0xc0000005.
 
-//2. shared_ptr最大的问题是存在循环引用的问题：
+// 2. shared_ptr最大的问题是存在循环引用的问题：
 //
 //如果两个类的原始指针的循环使用，那么会出现重复释放的问题：
 
@@ -136,9 +151,33 @@ void testShared1()
     }
 }
 
+void testWeak()
+{
+    struct po
+    {
+        int x, y;
+        po(int x = 0, int y = 0) : x(x), y(y) {}
+    };
+
+    std::shared_ptr<po> sharedPtr(new po(-1, -2));
+    std::weak_ptr<po> weakPtr(sharedPtr);
+
+    printf("sharedPtr_Count = %d, weakPtr_Count = %d, Value = %d \r\n", sharedPtr.use_count(), weakPtr.use_count(), *sharedPtr);
+    //当weakPtr为空或者对应的shared_ptr不再有内部指针时，expired返回为true.
+    if (!weakPtr.expired())
+    {
+        std::shared_ptr<po> sharedPtr2 = weakPtr.lock();
+        printf("sharedPtr_Count = %d, weakPtr_Count = %d, Value = %d \r\n", sharedPtr.use_count(), weakPtr.use_count(), *sharedPtr);
+        *sharedPtr2 = 5;
+    }
+
+    printf("sharedPtr_Count = %d, weakPtr_Count = %d, Value = %d \r\n", sharedPtr.use_count(), weakPtr.use_count(), *sharedPtr);
+}
+
 int main()
 {
-    testShared1();
-
+    // foo_construct3();
+    // testShared1();
+    testWeak();
     return 0;
 }

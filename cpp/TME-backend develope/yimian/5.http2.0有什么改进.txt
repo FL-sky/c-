@@ -1,0 +1,12 @@
+http1.0 / http2.0 / http / https 的区别
+https://www.cnblogs.com/aishuishuiADgai/p/15242564.html
+
+
+-----------------
+HTTP2.0的改进
+https://blog.csdn.net/qq_41800366/article/details/115109820
+
+
+
+http2.0的改进
+https://blog.csdn.net/qq_40409143/article/details/116267521

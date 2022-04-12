@@ -1,0 +1,46 @@
+C++中的4种类型转换
+https://blog.csdn.net/weixin_42482896/article/details/88939439
+
+
+1、static_cast
+类似于 C 语言中的类型转换，可以进行无条件类型转换。应用场景：
+*基本类型转换。
+int i = 1;
+double j = static_cast <double> (i);
+
+注：static_cast 不能去除类型的 const 或者 volatile 属性；不能进行无关类型转换（如非基类和子类）。
+
+
+2、dynamic_cast
+dynamic_cast 只能用于对象指针之间的转换，转换结果亦可以是应用。在类层次间进行上行转换时，dynamic_cast 和 static_cast 的效果是一样的；
+在进行下行转换时，dynamic_cast 具有类型检查的功能，比 static_cast 更安全。
+
+class Base { virtual void dummy ( ) { } };
+class Derived : public Base { };
+
+Base *  b1 = new Base;
+Base * b2 = new Derived;
+
+Derived * b3 = dynamic_cast <Derived * > (b1);  //  转换失败，返回 NULL
+Derived * b4 = dynamic_cast <Derived * > (b2);  // 转换成功
+
+Derived & b5 = dynamic_cast <Derived & > (b1);   // 转换失败（抛出异常）
+Derived & b6 = dynamic_cast <Derived & > (b2);  // 转换成功
+
+注：父子类指针之间转换时，该父类中必须包含一个虚函数
+
+3、const_cast
+用于取出 const 属性，去掉类型的 const 或者 volatile 属性，将 const 类型的指针变为非 const 类型的指针。
+
+const int * fun(int x, int y) { };　
+int * ptr = const_cast < int * > (fun(2, 3));
+
+
+4、reinterpret_cast
+reinterpret_cast 只是重新解释类型，没有二进制的转换。应用：
+
+*转换的类型必须是一个指针、引用、算术类型、函数指针或者成员指针。比特位级别上进行转换。
+它可以把一个指针转换成一个整数，也可以把一个整数转换成一个指针（先把一个指针转换成一个整数，在把该整数转换成原类型的指针，还可以得到原先的指针值）。但不能将非32bit的实例转成指针。
+*一般用在函数指针类型之间进行转换。
+*不能保证可移植性。
+注：此类型转换不安全，需谨慎使用。

@@ -42,10 +42,16 @@ void CallVirtualFun(void *pThis, int index = 0)
     memcpy(&funptr, reinterpret_cast<long *>(lVptrAddr + index * sizeof(int *)), 4);
     funptr(pThis); //调用
 }
-int main()
+int main2()
 {
     A *p = new B;
     CallVirtualFun(p);    //调用虚函数p->fun()
     CallVirtualFun(p, 1); //调用虚函数p->fun2()
+    return 0;
+}
+
+int main()
+{
+    main1();
     return 0;
 }

@@ -12,7 +12,7 @@ void foo(int n)
 int main()
 {
     char *p = NULL;
-    //foo(NULL);///error: call of overloaded 'foo(NULL)' is ambiguous
+    // foo(NULL); /// error: call of overloaded 'foo(NULL)' is ambiguous
     foo((char *)(NULL));
     foo(nullptr);
     return 0;
