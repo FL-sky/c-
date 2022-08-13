@@ -1,5 +1,6 @@
 #include <cstdio>
-
+#include <bits/stdc++.h>
+using namespace std;
 int a[1000]; //全局变量，方便调试
 void quicksort(int left, int right)
 { /// void quicksort(int *a, int left, int right) {
@@ -41,3 +42,9 @@ int main()
         printf("%d\t", a[i]);
     return 0;
 }
+
+/*
+16
+51 5 150 -6 5 0 15 125 11 2326 6 1 -1 55 69 9
+
+*/
