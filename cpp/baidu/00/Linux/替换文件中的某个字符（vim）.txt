@@ -1,0 +1,16 @@
+https://blog.csdn.net/longe20111104/article/details/121223976
+
+1.基本替换
+：s/str1/str2/ 替换当前行第一个str1为str2
+
+：s/str1/str2/g 替换当前行所有str1为str2
+
+:n,$s/str1/str2/ 替换第 n 行开始到最后一行中每一行的第一个str1为str2
+
+:n,$s/str1/str2/g 替换第 n 行开始到最后一行中每一行所有str1为str2
+
+（n 为数字，若 n 为 .，表示从当前行开始到最后一行）
+
+:%s/str1/str2/（等同于 :g/str1/s//str2/） 替换每一行的第一个str1为str2
+
+:%s/str1/str2/g（等同于 :g/str1/s//str2/g） 替换每一行中所有str1为str2

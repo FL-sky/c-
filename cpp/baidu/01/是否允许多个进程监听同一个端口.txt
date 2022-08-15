@@ -1,0 +1,10 @@
+https://blog.csdn.net/L13763338360/article/details/106519027/
+
+1. 问题描述
+一个进程监听端口，经验告诉我们，如果多次启动一个进程会报错：“Address already in use!"。这是由于bind函数导致的，由于该端口号已经被第一个进程监听了。有哪些方法可以实现多个进程监听同一个端口呢？
+
+2. 方案一：fork
+
+
+3. 方案二：SO_REUSEPORT
+SO_REUSEPORT支持多个进程或者线程绑定到同一端口，提高服务器程序的性能
